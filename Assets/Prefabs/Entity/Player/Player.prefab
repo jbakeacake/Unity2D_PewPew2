@@ -69,7 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponOrigin: {fileID: 3869432035030631910}
   movementOptions:
-    speed: 15
+    speed: 30
     dashDistance: 5
     counterMovementThreshold: 0.175
     counterMovementMagnitude: 0.15
@@ -146,7 +146,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 7be38511eb96d7d4a9e7ea9e0872c635, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -256,7 +256,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 91ab3234ca56858429f1f2be5ac8ce65, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
