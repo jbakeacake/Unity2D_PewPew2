@@ -3,12 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MobRoom : MonoBehaviour
+public class MobRoom : Room
 {
     public int numberOfEnemies = 10;
     public int allowedToSpawnAtOnce = 3;
     public float spawnRate = 5.0f;
-    public RoomOptions roomOptions;
     public GameObject[] enemies, destructibles;
 
     void Start()

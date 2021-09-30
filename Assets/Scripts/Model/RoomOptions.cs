@@ -9,4 +9,8 @@ public class RoomOptions
     public float spawnCircleRadius;
     public Transform spawnCircleCenter;
     public LayerMask spawnLayers;
+    public GameObject corridorPrefab, wallPrefab;
+    public Transform[] corridorPositions;
+    public bool isInitialRoom;
+    public bool hasExit;
 }

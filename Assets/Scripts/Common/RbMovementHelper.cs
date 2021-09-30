@@ -14,7 +14,6 @@ public class RbMovementHelper
     public static void applyCounterMovement(Rigidbody2D rb, Vector2 forward, float xInput, float yInput, MovementOptions movementOptions)
     {
         Vector2 finalVelocity = Vector3.zero;
-
         if (Math.Abs(forward.x) > movementOptions.counterMovementThreshold && Math.Abs(xInput) < 0.05f)
         {
             finalVelocity += movementOptions.speed * forward.normalized * Time.deltaTime * -forward.x *
