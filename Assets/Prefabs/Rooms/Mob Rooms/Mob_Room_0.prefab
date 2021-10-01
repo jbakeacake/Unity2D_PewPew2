@@ -23,13 +23,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 238991218970272292}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: -15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1497937082299350682}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!1 &403782243099229947
 GameObject:
   m_ObjectHideFlags: 0
@@ -77,15 +77,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 645769bba8e015b45abc2470ccaaa1a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfEnemies: 10
-  allowedToSpawnAtOnce: 2
-  spawnRate: 3
   roomOptions:
     spawnCircleRadius: 13
     spawnCircleCenter: {fileID: 403782243099229946}
     spawnLayers:
       serializedVersion: 2
       m_Bits: 4294967295
+    corridorPrefab: {fileID: 2590646568208397525, guid: f6fa596472307cb4b8be5a6d088ac6c3, type: 3}
+    wallPrefab: {fileID: 5259246170080641945, guid: ffb016a12f91ba64e9811a7c3fb36ac6, type: 3}
+    corridorPositions:
+    - direction: 0
+      transform: {fileID: 1730663396862369458}
+      isCorridor: 0
+      isInstantiated: 0
+    - direction: 1
+      transform: {fileID: 1033305719367010285}
+      isCorridor: 0
+      isInstantiated: 0
+    - direction: 2
+      transform: {fileID: 3528888702953262135}
+      isCorridor: 0
+      isInstantiated: 0
+    - direction: 3
+      transform: {fileID: 3399779107484719731}
+      isCorridor: 0
+      isInstantiated: 0
+  numberOfEnemies: 10
+  allowedToSpawnAtOnce: 2
+  spawnRate: 3
   enemies:
   - {fileID: 535881019697478263, guid: 250a3aaaed7120847a51d3ea2e347d11, type: 3}
   destructibles: []
@@ -803,13 +822,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1748950612548132820}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 15, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1497937082299350682}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!1 &3500177978694110567
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,22 @@ public class RoomOptions
     public Transform spawnCircleCenter;
     public LayerMask spawnLayers;
     public GameObject corridorPrefab, wallPrefab;
-    public Transform[] corridorPositions;
-    public bool isInitialRoom;
-    public bool hasExit;
+    public CorridorPosition[] corridorPositions;
+
+    public enum Direction
+    {
+        TOP,
+        BOTTOM,
+        LEFT,
+        RIGHT,
+        NONE
+    }
+    [Serializable]
+    public struct CorridorPosition
+    {
+        public Direction direction;
+        public Transform transform;
+        public bool isCorridor;
+        public bool isInstantiated;
+    }
 }
