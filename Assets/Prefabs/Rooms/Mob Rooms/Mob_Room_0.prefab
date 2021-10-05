@@ -80,28 +80,17 @@ MonoBehaviour:
   roomOptions:
     spawnCircleRadius: 13
     spawnCircleCenter: {fileID: 403782243099229946}
+    corridorOrigins:
+    - {fileID: 3705329439441475423}
+    - {fileID: 8335353370207458831}
+    - {fileID: 8667170347542902570}
+    - {fileID: 7637991489561067588}
     spawnLayers:
       serializedVersion: 2
       m_Bits: 4294967295
     corridorPrefab: {fileID: 2590646568208397525, guid: f6fa596472307cb4b8be5a6d088ac6c3, type: 3}
     wallPrefab: {fileID: 5259246170080641945, guid: ffb016a12f91ba64e9811a7c3fb36ac6, type: 3}
-    corridorPositions:
-    - direction: 0
-      transform: {fileID: 1730663396862369458}
-      isCorridor: 0
-      isInstantiated: 0
-    - direction: 1
-      transform: {fileID: 1033305719367010285}
-      isCorridor: 0
-      isInstantiated: 0
-    - direction: 2
-      transform: {fileID: 3528888702953262135}
-      isCorridor: 0
-      isInstantiated: 0
-    - direction: 3
-      transform: {fileID: 3399779107484719731}
-      isCorridor: 0
-      isInstantiated: 0
+  mapCoordinate: {x: 0, y: 0}
   numberOfEnemies: 10
   allowedToSpawnAtOnce: 2
   spawnRate: 3

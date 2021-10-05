@@ -358,28 +358,17 @@ MonoBehaviour:
   roomOptions:
     spawnCircleRadius: 0
     spawnCircleCenter: {fileID: 3815439768075833004}
+    corridorOrigins:
+    - {fileID: 4557261967542532027}
+    - {fileID: 2985080328181624548}
+    - {fileID: 112746235687746657}
+    - {fileID: 2181957303546079781}
     spawnLayers:
       serializedVersion: 2
       m_Bits: 0
     corridorPrefab: {fileID: 2590646568208397525, guid: f6fa596472307cb4b8be5a6d088ac6c3, type: 3}
     wallPrefab: {fileID: 5259246170080641945, guid: ffb016a12f91ba64e9811a7c3fb36ac6, type: 3}
-    corridorPositions:
-    - direction: 0
-      transform: {fileID: 2985080328181624548}
-      isCorridor: 0
-      isInstantiated: 0
-    - direction: 1
-      transform: {fileID: 4557261967542532027}
-      isCorridor: 0
-      isInstantiated: 0
-    - direction: 2
-      transform: {fileID: 112746235687746657}
-      isCorridor: 0
-      isInstantiated: 0
-    - direction: 3
-      transform: {fileID: 2181957303546079781}
-      isCorridor: 0
-      isInstantiated: 0
+  mapCoordinate: {x: 0, y: 0}
 --- !u!1 &3815439768509220350
 GameObject:
   m_ObjectHideFlags: 0

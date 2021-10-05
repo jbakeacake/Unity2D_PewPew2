@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,114 +8,101 @@ using static RoomOptions;
 public class Room : MonoBehaviour
 {
     public RoomOptions roomOptions;
-    private int degreeOfChance;
-    void Start()
+    public Vector2Int mapCoordinate;
+    private int degreeOfChance = 0;
+
+    public Dictionary<Vector2Int, bool?> corridorExistsDictionary;
+
+    void Awake()
     {
-        this.degreeOfChance = 0;
+        this.corridorExistsDictionary = new Dictionary<Vector2Int, bool?>();
+        this.corridorExistsDictionary.Add(Vector2Int.up, null);
+        this.corridorExistsDictionary.Add(Vector2Int.down, null);
+        this.corridorExistsDictionary.Add(Vector2Int.left, null);
+        this.corridorExistsDictionary.Add(Vector2Int.right, null);
     }
-    public void generateRandomCorridors(Vector2 origin, Dictionary<Vector2, GameObject> currentMap)
+
+    public void generateRandomCorridors(Dictionary<Vector2Int, Room> currentMap)
     {
-        // Shuffle our corridor positions to make it look more random:
-        CorridorPosition[] shuffledPositions = roomOptions.corridorPositions.OrderBy(ign => Utils.random.Next()).ToArray();
-        for (int i = 0; i < shuffledPositions.Length; i++)
+        foreach (Transform t in roomOptions.corridorOrigins.OrderBy(x => Utils.random.Next()))
         {
-            if (!shuffledPositions[i].isInstantiated && canGenerateCorridor(origin, shuffledPositions[i], currentMap))
+            generateCorridor(currentMap, new Vector2Int((int)t.up.x, (int)t.up.y));
+        }
+    }
+
+    public void wallOffUnreachableNeighbors(Dictionary<Vector2Int, Room> currentMap)
+    {
+        wallOff(currentMap, mapCoordinate + Vector2Int.up, Vector2Int.up, Vector2Int.down); // try-create top wall
+        wallOff(currentMap, mapCoordinate + Vector2Int.down, Vector2Int.down, Vector2Int.up); // try-create bottom wall
+        wallOff(currentMap, mapCoordinate + Vector2Int.left, Vector2Int.left, Vector2Int.right); // try-create left wall
+        wallOff(currentMap, mapCoordinate + Vector2Int.right, Vector2Int.right, Vector2Int.left); // try-create right wall
+    }
+
+    private void wallOff(Dictionary<Vector2Int, Room> currentMap, Vector2Int adjacentCoordinate, Vector2Int originDirection, Vector2Int neighborOriginDirection)
+    {
+        // First grab our neighbor, check if they exist, then check if they have a corridor:
+        if (currentMap.TryGetValue(adjacentCoordinate, out Room neighbor) && !hasCorridor(neighbor, neighborOriginDirection))
+        {
+            // If yes, create a wall:
+            Transform wallOrigin = roomOptions.corridorOrigins.First(t => (new Vector2Int((int)t.up.x, (int)t.up.y)) == originDirection);
+            Instantiate(
+                roomOptions.wallPrefab,
+                wallOrigin.position,
+                wallOrigin.rotation
+            );
+            this.corridorExistsDictionary[originDirection] = false;
+        }
+    }
+
+    private bool hasCorridor(Room neighbor, Vector2Int corridorDirection)
+    {
+        if (neighbor == null) return false;
+
+        bool? exists = neighbor.corridorExistsDictionary[corridorDirection];
+        return exists.HasValue && exists.Value;
+    }
+
+    private void generateCorridor(Dictionary<Vector2Int, Room> currentMap, Vector2Int corridorDirection)
+    {
+        Room neighbor = null;
+        currentMap.TryGetValue(mapCoordinate + corridorDirection, out neighbor);
+
+        bool isWall = this.corridorExistsDictionary[corridorDirection].HasValue && !this.corridorExistsDictionary[corridorDirection].Value;
+
+        // If we don't own a wall in that direction AND our neighbor doesn't have a corridor connected to us:
+        if (!isWall && (neighbor == null || !hasCorridor(neighbor, -corridorDirection)))
+        {
+            Transform corridorOrigin = roomOptions.corridorOrigins.First(t => (new Vector2Int((int)t.up.x, (int)t.up.y)) == corridorDirection);
+            if (hasChanceToBeGenerated())
             {
-                Instantiate(
+                Corridor corridor = Instantiate(
                     roomOptions.corridorPrefab,
-                    shuffledPositions[i].transform.position,
-                    shuffledPositions[i].transform.rotation
-                );
-                shuffledPositions[i].isCorridor = true;
-                shuffledPositions[i].isInstantiated = true;
+                    corridorOrigin.position,
+                    corridorOrigin.rotation
+                )
+                .GetComponent<Corridor>();
+                corridor.parentRoom = this;
+                this.corridorExistsDictionary[corridorDirection] = true;
             }
-            else if (!shuffledPositions[i].isInstantiated)
+            else
             {
                 Instantiate(
                     roomOptions.wallPrefab,
-                    shuffledPositions[i].transform.position,
-                    shuffledPositions[i].transform.rotation
+                    corridorOrigin.position,
+                    corridorOrigin.rotation
                 );
-                shuffledPositions[i].isCorridor = false;
-                shuffledPositions[i].isInstantiated = true;
+                this.corridorExistsDictionary[corridorDirection] = false;
             }
         }
     }
 
-    private void wallOffUnreachableNeighbors(Vector2 origin, Dictionary<Vector2, GameObject> currentMap)
+    private bool hasChanceToBeGenerated()
     {
-        tryCreateWall(origin + Vector2.up, currentMap, Direction.BOTTOM, Direction.TOP); // try-create top wall
-        tryCreateWall(origin + Vector2.down, currentMap, Direction.TOP, Direction.BOTTOM); // try-create bottom wall
-        tryCreateWall(origin + Vector2.left, currentMap, Direction.RIGHT, Direction.LEFT); // try-create left wall
-        tryCreateWall(origin + Vector2.right, currentMap, Direction.LEFT, Direction.RIGHT); // try-create right wall
-    }
+        int chanceToGenerate = Mathf.RoundToInt(Mathf.Pow(0.5f, degreeOfChance) * 100.0f);
+        int rollADie = Utils.getRandomInteger(0, 101);
 
-    private void tryCreateWall(Vector2 adjacentCoordinate, Dictionary<Vector2, GameObject> currentMap, Direction connectingDirection, Direction localDirection)
-    {
-        if (currentMap.TryGetValue(adjacentCoordinate, out GameObject adjacent) && !hasConnectingDoor(adjacent, connectingDirection))
-        {
-            CorridorPosition corridorPosition = getCorridorPosition(localDirection);
-            corridorPosition.isCorridor = false;
-            corridorPosition.isInstantiated = true;
-            Instantiate(
-                roomOptions.wallPrefab,
-                corridorPosition.transform.position,
-                corridorPosition.transform.rotation
-            );
-        }
-    }
+        degreeOfChance++;
 
-    private bool hasConnectingDoor(GameObject adjacentRoom, Direction connectingDoorDirection)
-    {
-        CorridorPosition corridorPosition = getCorridorPosition(connectingDoorDirection);
-        return corridorPosition.isCorridor;
-    }
-
-    private CorridorPosition getCorridorPosition(Direction direction)
-    {
-        return roomOptions.corridorPositions
-            .Where(adjPos => adjPos.direction == direction)
-            .First();
-    }
-
-    private bool canGenerateCorridor(Vector2 origin, CorridorPosition corridorPosition, Dictionary<Vector2, GameObject> currentMap)
-    {
-        int chanceOfCorridor = Mathf.RoundToInt(Mathf.Pow(0.5f, degreeOfChance) * 100.0f);
-        int diceRoll = Utils.getRandomInteger(0, 101);
-
-        bool successfulRoll = diceRoll <= chanceOfCorridor;
-        bool doesAdjacentCorridorExist = false;
-        Vector2 adjacentOrigin = Vector2.zero;
-        Direction connectingDoorDirection = Direction.NONE;
-        switch (corridorPosition.direction) {
-            case Direction.TOP:
-                adjacentOrigin = origin + Vector2.up;
-                connectingDoorDirection = Direction.BOTTOM;
-                break;
-            case Direction.BOTTOM:
-                adjacentOrigin = origin + Vector2.down;
-                connectingDoorDirection = Direction.TOP;
-                break;
-            case Direction.LEFT:
-                adjacentOrigin = origin + Vector2.left;
-                connectingDoorDirection = Direction.RIGHT;
-                break;
-            case Direction.RIGHT:
-                adjacentOrigin = origin + Vector2.right;
-                connectingDoorDirection = Direction.LEFT;
-                break;
-        }
-        if (successfulRoll && currentMap.TryGetValue(adjacentOrigin, out GameObject room)) {
-            CorridorPosition adjacentCorridorPosition = room.GetComponent<Room>().getCorridorPosition(connectingDoorDirection);
-            doesAdjacentCorridorExist = adjacentCorridorPosition.isCorridor && adjacentCorridorPosition.isInstantiated;
-        }
-
-        bool canGenerateCorridor = successfulRoll && !doesAdjacentCorridorExist;
-        if (canGenerateCorridor)
-        {
-            degreeOfChance++;
-        }
-
-        return successfulRoll && !doesAdjacentCorridorExist;
+        return rollADie <= chanceToGenerate;
     }
 }
