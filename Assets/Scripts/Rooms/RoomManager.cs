@@ -9,12 +9,14 @@ public class RoomManager : MonoBehaviour
     public GameObject initialRoom, exitRoom;
     public RoomVariance[] roomVariance;
     private Dictionary<Vector2Int, Room> dungeonMap;
+    private Queue<GameObject> roomQueue;
     private static readonly int DISTANCE_BETWEEN_ROOMS = 50;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         this.dungeonMap = new Dictionary<Vector2Int, Room>();
+        this.roomQueue = this.generateRoomQueue();
         this.generateInitialRoom();
     }
 
@@ -24,23 +26,67 @@ public class RoomManager : MonoBehaviour
         if (!this.dungeonMap.TryGetValue(newMapCoordinate, out Room newRoom))
         {
             Vector2Int previousRoomPosition = new Vector2Int((int)previousRoom.gameObject.transform.position.x, (int)previousRoom.gameObject.transform.position.y);
-            generateRoom(initialRoom, newMapCoordinate * DISTANCE_BETWEEN_ROOMS);
+            if (roomQueue.Count == 1)
+            {
+                generateRoom(roomQueue.Dequeue(), newMapCoordinate, 10); // Wall off Exit Room
+            }
+            else if (roomQueue.Count > 0)
+            {
+                generateRoom(roomQueue.Dequeue(), newMapCoordinate);
+            }
+            else
+            {
+                generateRoom(getWeightedRandomRoom(), newMapCoordinate, 10); // Wall off Edge Rooms
+            }
         }
     }
 
-    public void generateRoom(GameObject original, Vector2Int origin)
+    public void generateRoom(GameObject original, Vector2Int origin, int initialDegreeOfChance = 0)
     {
         Room room = Instantiate(
             original,
-            new Vector3(origin.x, origin.y),
+            new Vector3(origin.x, origin.y) * DISTANCE_BETWEEN_ROOMS,
             Quaternion.identity)
             .GetComponent<Room>();
-        Vector2Int newMapCoordinate = origin / DISTANCE_BETWEEN_ROOMS;
-        room.mapCoordinate = newMapCoordinate;
+        room.degreeOfChance = initialDegreeOfChance;
+        room.mapCoordinate = origin;
         room.wallOffUnreachableNeighbors(dungeonMap);
         room.generateRandomCorridors(dungeonMap);
 
-        dungeonMap.Add(newMapCoordinate, room);
+        dungeonMap.Add(origin, room);
+    }
+
+    private Queue<GameObject> generateRoomQueue()
+    {
+        Queue<GameObject> queue = new Queue<GameObject>();
+        for (int i = 0; i < maxNumberOfRooms - 1; i++)
+        {
+            queue.Enqueue(getWeightedRandomRoom());
+        }
+
+        queue.Enqueue(exitRoom);
+        return queue;
+    }
+
+    private GameObject getWeightedRandomRoom()
+    {
+        double totalWeight = 0;
+        foreach (RoomVariance v in this.roomVariance)
+        {
+            totalWeight += v.weight;
+        }
+
+        int idx = 0;
+        for (double r = Utils.random.NextDouble() * totalWeight; idx < roomVariance.Length - 1; ++idx)
+        {
+            r -= roomVariance[idx].weight;
+            if (r <= 0.0)
+            {
+                break;
+            }
+        }
+
+        return roomVariance[idx].roomPrefab;
     }
 
     private void generateInitialRoom()

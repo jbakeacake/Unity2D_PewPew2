@@ -9,7 +9,7 @@ public class Room : MonoBehaviour
 {
     public RoomOptions roomOptions;
     public Vector2Int mapCoordinate;
-    private int degreeOfChance = 0;
+    public int degreeOfChance = 0;
 
     public Dictionary<Vector2Int, bool?> corridorExistsDictionary;
 
