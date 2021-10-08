@@ -5,19 +5,20 @@ using UnityEngine;
 
 public class Corridor : MonoBehaviour
 {
-    public RoomManager manager;
     public Room parentRoom;
     public RoomGenerateTrigger roomTrigger;
     public Door.DOOR_STATE currentDoorState;
     public Door[] doors;
 
+    private RoomManager manager;
+    
     void Awake()
     {
         this.roomTrigger.collideWithPlayer += () => manager.tryGenerateAdjoiningRoom(parentRoom, new Vector2Int((int)transform.up.x, (int)transform.up.y));
     }
     void Start()
     {
-        this.currentDoorState = Door.DOOR_STATE.CLOSED;
+        this.currentDoorState = Door.DOOR_STATE.OPEN;
         this.manager = FindObjectOfType<RoomManager>();
     }
 

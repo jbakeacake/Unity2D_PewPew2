@@ -673,7 +673,8 @@ MonoBehaviour:
     corridorPrefab: {fileID: 2590646568208397525, guid: f6fa596472307cb4b8be5a6d088ac6c3, type: 3}
     wallPrefab: {fileID: 5259246170080641945, guid: ffb016a12f91ba64e9811a7c3fb36ac6, type: 3}
   mapCoordinate: {x: 0, y: 0}
-  numberOfEnemies: 5
+  degreeOfChance: 0
+  numberOfEnemies: 1
   allowedToSpawnAtOnce: 2
   spawnRate: 1
   enemies:
