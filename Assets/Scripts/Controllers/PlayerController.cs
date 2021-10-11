@@ -25,7 +25,7 @@ public class PlayerController : EntityController
         RbMovementHelper.applyMovement(rb, forward, movementOptions);
         TransformHelper.lookAtCursor(transform, playerCamera);
         TransformHelper.lookAtCursor(weaponOrigin, playerCamera);
-        TransformHelper.swapSides(weaponOrigin, transform, playerCamera);
+        TransformHelper.swapSides(weaponOrigin, transform, playerCamera.ScreenToWorldPoint(Input.mousePosition));
     }
 
     public override void setMovementDirection()

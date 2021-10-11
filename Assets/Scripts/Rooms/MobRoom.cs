@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class MobRoom : Room
 {
+    public GameObject navMesh;
     public int numberOfEnemies = 10;
     public int allowedToSpawnAtOnce = 3;
     public float spawnRate = 5.0f;
@@ -27,7 +28,8 @@ public class MobRoom : Room
         {
             for (int enemiesSpawnedIn = 0; enemiesSpawnedIn < allowedToSpawnAtOnce;)
             {
-                RandomSpawner.trySpawnObject(roomOptions, enemies);
+                GameObject enemyClone = RandomSpawner.trySpawnObject(roomOptions, enemies);
+                enemyClone.transform.SetParent(navMesh.transform);
                 enemiesSpawnedIn++;
                 currentEnemies++;
             }

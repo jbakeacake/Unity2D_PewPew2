@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &72482004216691610
 Transform:
   m_ObjectHideFlags: 0
@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c56c9b51ebb178a43927f5161fa6c7b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxNumberOfRooms: 10
+  maxNumberOfRooms: 2
   initialRoom: {fileID: 3815439768075833005, guid: 1a33ef9db11d92c4c97161775c163789, type: 3}
   exitRoom: {fileID: 1194097972704324850, guid: c42ca80f667117a44bd6d403d5a498aa, type: 3}
   roomVariance:

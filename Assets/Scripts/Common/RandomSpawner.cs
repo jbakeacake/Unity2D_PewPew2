@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class RandomSpawner
 {
-    public static void trySpawnObject(RoomOptions options, GameObject[] objectPrefabs)
+    public static GameObject trySpawnObject(RoomOptions options, GameObject[] objectPrefabs)
     {
         if (objectPrefabs == null || objectPrefabs.Length == 0)
         {
@@ -15,7 +15,7 @@ public class RandomSpawner
         GameObject objectToSpawn = objectPrefabs.Skip(Utils.getRandomInteger(0, objectPrefabs.Length)).First();
         Vector3 spawnLocation = getRandomSpawnLocation(options.spawnCircleRadius, options.spawnCircleCenter, options.spawnLayers);
 
-        MonoBehaviour.Instantiate(objectToSpawn,
+        return MonoBehaviour.Instantiate(objectToSpawn,
             spawnLocation,
             Quaternion.identity);
     }
