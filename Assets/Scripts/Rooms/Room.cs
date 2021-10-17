@@ -40,10 +40,10 @@ public class Room : MonoBehaviour
 
     private void wallOff(Dictionary<Vector2Int, Room> currentMap, Vector2Int adjacentCoordinate, Vector2Int originDirection, Vector2Int neighborOriginDirection)
     {
-        // First grab our neighbor, check if they exist, then check if they have a corridor:
+        // First grab our neighbor and check if they exist, then check if they DO NOT have a corridor:
         if (currentMap.TryGetValue(adjacentCoordinate, out Room neighbor) && !hasCorridor(neighbor, neighborOriginDirection))
         {
-            // If yes, create a wall:
+            
             Transform wallOrigin = roomOptions.corridorOrigins.First(t => (new Vector2Int((int)t.up.x, (int)t.up.y)) == originDirection);
             Instantiate(
                 roomOptions.wallPrefab,
@@ -69,7 +69,7 @@ public class Room : MonoBehaviour
 
         bool isWall = this.corridorExistsDictionary[corridorDirection].HasValue && !this.corridorExistsDictionary[corridorDirection].Value;
 
-        // If we don't own a wall in that direction AND our neighbor doesn't have a corridor connected to us:
+        // If we don't own a wall in that direction AND our neighbor doesn't have a corridor already connected to us:
         if (!isWall && (neighbor == null || !hasCorridor(neighbor, -corridorDirection)))
         {
             Transform corridorOrigin = roomOptions.corridorOrigins.First(t => (new Vector2Int((int)t.up.x, (int)t.up.y)) == corridorDirection);

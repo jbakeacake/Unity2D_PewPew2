@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3445184133515076706}
   - component: {fileID: 7164943006301833996}
   - component: {fileID: 5970802500086525006}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Walled_Corridor_Horizontal
   m_TagString: Untagged
   m_Icon: {fileID: 0}

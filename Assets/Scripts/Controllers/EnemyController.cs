@@ -17,6 +17,7 @@ public class EnemyController : EntityController
     // Start is called before the first frame update
     void Start()
     {
+        this.health = this.maxHealth;
         this.player = FindObjectOfType<PlayerController>().gameObject.transform;
         this.agent = GetComponent<NavMeshAgent>();
         this.rb = GetComponent<Rigidbody2D>();

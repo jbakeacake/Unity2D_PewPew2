@@ -9,4 +9,9 @@ public class RbMovementHelper
     {
         rb.AddForce(forward * movementOptions.speed);
     }
+
+    public static void addRecoil(Rigidbody2D rb, Vector2 projectileDirection, float knockBack)
+    {
+        rb.AddForce(projectileDirection * knockBack, ForceMode2D.Impulse);
+    }
 }

@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 2590646566467177206}
   - component: {fileID: 2590646566467177207}
   - component: {fileID: 9115880556463567030}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Door_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 2590646567380855300}
   - component: {fileID: 2590646567380855301}
   - component: {fileID: 5597775455782110172}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Door_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 2590646567574694118}
   - component: {fileID: 2590646567574694119}
   - component: {fileID: 1578095650}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Door_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -490,7 +490,7 @@ GameObject:
   - component: {fileID: 2590646567805884900}
   - component: {fileID: 2590646567805884899}
   - component: {fileID: 2590646567805884898}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Wall_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -598,7 +598,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2590646567888087100}
   - component: {fileID: 958967215}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Doors_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -647,7 +647,7 @@ GameObject:
   - component: {fileID: 2590646568002164855}
   - component: {fileID: 2590646568002164808}
   - component: {fileID: 9159605}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Door_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -755,7 +755,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2590646568010475178}
   - component: {fileID: 820736289}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Doors_Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -841,7 +841,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ac03a9175a254e409a3923f2c1d40c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
   parentRoom: {fileID: 0}
   roomTrigger: {fileID: 2032412990977140142}
   currentDoorState: 0
@@ -857,7 +856,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4849396043087707365}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -891,7 +890,7 @@ GameObject:
   - component: {fileID: 5578809497725517490}
   - component: {fileID: 5155351771310344814}
   - component: {fileID: 4546085843752070403}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Wall_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
