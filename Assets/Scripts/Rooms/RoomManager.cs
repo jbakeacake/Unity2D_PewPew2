@@ -8,9 +8,10 @@ public class RoomManager : MonoBehaviour
     public int maxNumberOfRooms;
     public GameObject initialRoom, exitRoom;
     public RoomVariance[] roomVariance;
+    public MiniMapController miniMapController;
+    public static readonly int DISTANCE_BETWEEN_ROOMS = 50;
     private Dictionary<Vector2Int, Room> dungeonMap;
     private Queue<GameObject> roomQueue;
-    private static readonly int DISTANCE_BETWEEN_ROOMS = 50;
 
     // Start is called before the first frame update
     void Awake()
@@ -23,9 +24,8 @@ public class RoomManager : MonoBehaviour
     public void tryGenerateAdjoiningRoom(Room previousRoom, Vector2Int corridorDirection)
     {
         Vector2Int newMapCoordinate = previousRoom.mapCoordinate + corridorDirection;
-        if (!this.dungeonMap.TryGetValue(newMapCoordinate, out Room newRoom))
+        if (!this.dungeonMap.TryGetValue(newMapCoordinate, out Room ignore))
         {
-            Vector2Int previousRoomPosition = new Vector2Int((int)previousRoom.gameObject.transform.position.x, (int)previousRoom.gameObject.transform.position.y);
             if (roomQueue.Count == 1)
             {
                 generateRoom(roomQueue.Dequeue(), newMapCoordinate, 10); // Wall off Exit Room
@@ -48,11 +48,7 @@ public class RoomManager : MonoBehaviour
             new Vector3(origin.x, origin.y) * DISTANCE_BETWEEN_ROOMS,
             Quaternion.identity)
             .GetComponent<Room>();
-        room.degreeOfChance = initialDegreeOfChance;
-        room.mapCoordinate = origin;
-        room.wallOffUnreachableNeighbors(dungeonMap);
-        room.generateRandomCorridors(dungeonMap);
-
+        room.init(initialDegreeOfChance, origin, dungeonMap, this);
         dungeonMap.Add(origin, room);
     }
 

@@ -51,3 +51,4 @@ MonoBehaviour:
     roomPrefab: {fileID: 6437708175521243891, guid: 4d1ab39f0d2811c4fbe45061a4e4bc4e, type: 3}
   - weight: 0.5
     roomPrefab: {fileID: 1801087027541527336, guid: 2a07652ccc1be7d4ab9c931c6d8c3295, type: 3}
+  miniMapController: {fileID: 0}

@@ -53,25 +53,25 @@ public class EnemyController : EntityController
             this.obstacleLayer);
         if (hit && !hit.collider.gameObject.CompareTag("Player"))
         {
-            barrelStuffPlayer();
+            chasePlayer();
         }
         else
         {
-            float distanceFromPlayer = Vector2.Distance(transform.position, player.position);
-            if (distanceFromPlayer <= this.originalStoppingDistance)
+            Vector2 distanceFromPlayer = transform.position - player.position; // Vector2.Distance(transform.position, player.position);
+            if (distanceFromPlayer.sqrMagnitude <= this.originalStoppingDistance * this.originalStoppingDistance)
             {
                 backAwayFromPlayer();
             }
             else
             {
-                combatPlayerFromDistance();
+                maintainStoppingDistanceFromPlayer();
             }
         }
         
         this.forward = this.agent.desiredVelocity.normalized;
     }
 
-    private void barrelStuffPlayer()
+    private void chasePlayer()
     {
         this.agent.stoppingDistance = 1.5f; // Get as close as we can to the player
         this.agent.SetDestination(player.position);
@@ -84,7 +84,7 @@ public class EnemyController : EntityController
         this.agent.SetDestination(closestEdge.position);
     }
 
-    private void combatPlayerFromDistance()
+    private void maintainStoppingDistanceFromPlayer()
     {
         this.agent.stoppingDistance = this.originalStoppingDistance;
         this.agent.SetDestination(player.position);

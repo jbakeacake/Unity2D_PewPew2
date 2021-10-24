@@ -10,5 +10,5 @@ public class RoomOptions
     public Transform spawnCircleCenter;
     public List<Transform> corridorOrigins;
     public LayerMask spawnLayers;
-    public GameObject corridorPrefab, wallPrefab;
+    public GameObject corridorPrefab, wallPrefab, doorPrefab;
 }

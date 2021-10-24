@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8007779558566711088}
   - component: {fileID: 5758469100229175333}
   - component: {fileID: 4402992651175055504}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8045163740270463831}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Wall_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3413956184695785991}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Wall_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +246,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3833205943607680076}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Wall_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +278,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2632962248520215330}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Wall_Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -383,6 +383,7 @@ GameObject:
   - component: {fileID: 4731570588723075117}
   - component: {fileID: 4731570588723075107}
   - component: {fileID: 4731570588723075116}
+  - component: {fileID: 6238088296190643047}
   m_Layer: 0
   m_Name: Room_Bound
   m_TagString: Untagged
@@ -446,6 +447,18 @@ MonoBehaviour:
   m_Area: 0
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
+--- !u!114 &6238088296190643047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4731570588723075118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adf655fb878192642bcc756d066f133f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4731570589485968934
 GameObject:
   m_ObjectHideFlags: 0
@@ -618,7 +631,7 @@ GameObject:
   - component: {fileID: 3716380629855695177}
   - component: {fileID: 1537526326320169123}
   - component: {fileID: 5932668589776369708}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -757,7 +770,7 @@ GameObject:
   - component: {fileID: 6437708174868571087}
   - component: {fileID: 6437708174868571086}
   - component: {fileID: 6437708174868571085}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -866,7 +879,7 @@ GameObject:
   - component: {fileID: 6437708175283767224}
   - component: {fileID: 6437708175283767223}
   - component: {fileID: 6437708175283767222}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1012,6 +1025,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 645769bba8e015b45abc2470ccaaa1a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomManager: {fileID: 0}
   roomOptions:
     spawnCircleRadius: 13
     spawnCircleCenter: {fileID: 6437708175521243890}
@@ -1025,10 +1039,14 @@ MonoBehaviour:
       m_Bits: 1
     corridorPrefab: {fileID: 2590646568208397525, guid: f6fa596472307cb4b8be5a6d088ac6c3, type: 3}
     wallPrefab: {fileID: 5259246170080641945, guid: ffb016a12f91ba64e9811a7c3fb36ac6, type: 3}
+    doorPrefab: {fileID: 7116077212985911127, guid: 3650adb442926054c92eafd8bff5d1d4, type: 3}
   mapCoordinate: {x: 0, y: 0}
+  playerEnterTriggerDelegate: {fileID: 6238088296190643047}
   degreeOfChance: 0
-  navMesh: {fileID: 4731570588217346818}
+  doorways: []
+  activeEnemies: []
   numberOfEnemies: 10
+  navMesh: {fileID: 4731570588217346818}
   allowedToSpawnAtOnce: 2
   spawnRate: 5
   enemies:
@@ -1045,7 +1063,7 @@ GameObject:
   - component: {fileID: 6437708175637047903}
   - component: {fileID: 6437708175637047902}
   - component: {fileID: 6437708175637047901}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1154,7 +1172,7 @@ GameObject:
   - component: {fileID: 6437708176061531390}
   - component: {fileID: 6437708176061531389}
   - component: {fileID: 6437708176061531388}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1261,7 +1279,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6437708176455543971}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1296,7 +1314,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6437708176768914574}
   - component: {fileID: 6437708176768914573}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1409,7 +1427,7 @@ GameObject:
   - component: {fileID: 3219181416630013773}
   - component: {fileID: 8022415161810963745}
   - component: {fileID: 5411549465549032872}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1518,7 +1536,7 @@ GameObject:
   - component: {fileID: 3425676393527296290}
   - component: {fileID: 2731923515815352419}
   - component: {fileID: 3240400454486211415}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -18,7 +18,6 @@ public class PlayerController : EntityController
     void Update()
     {
         setMovementDirection();
-        // TODO useWeapon();
     }
 
     void FixedUpdate() {

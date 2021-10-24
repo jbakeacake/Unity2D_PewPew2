@@ -1,8 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class BaseWeaponController : MonoBehaviour
@@ -15,11 +10,11 @@ public class BaseWeaponController : MonoBehaviour
     [Range(1, 10)] public int bulletsPerFire = 1;
     public float firePointArc = 135.0f;
     public bool isAutomatic = true;
-
+    
+    public ProjectileOptions projectileOptions;
 
     private float nextFire = 0.0f;
     private float currentDeviation = 0.0f;
-    
 
     void Update()
     {
@@ -57,6 +52,7 @@ public class BaseWeaponController : MonoBehaviour
             angleOfFire
         );
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        bullet.GetComponent<BaseProjectile>().projectileOptions = this.projectileOptions;
         Destroy(bullet, 10.0f);
     }
 
