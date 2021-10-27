@@ -9,7 +9,7 @@ public class RoomManager : MonoBehaviour
     public GameObject initialRoom, exitRoom;
     public RoomVariance[] roomVariance;
     public MiniMapController miniMapController;
-    public static readonly int DISTANCE_BETWEEN_ROOMS = 50;
+    public static readonly int DISTANCE_BETWEEN_ROOMS = 60;
     private Dictionary<Vector2Int, Room> dungeonMap;
     private Queue<GameObject> roomQueue;
 

@@ -186,6 +186,8 @@ MonoBehaviour:
   particleSystems:
   - name: takeDamage
     particleSystem: {fileID: 8779666075223656027}
+  - name: onDeath
+    particleSystem: {fileID: 8233529066347094414, guid: 58f7f6f11296b2842aa20f134fbf092a, type: 3}
   movementOptions:
     speed: 10
     dashDistance: 5

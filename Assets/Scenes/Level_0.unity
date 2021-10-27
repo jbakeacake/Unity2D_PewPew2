@@ -346,6 +346,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RoomManager
       objectReference: {fileID: 0}
+    - target: {fileID: 72482004216691608, guid: 97336952f28c48f44b9d85bc01bbece5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 72482004216691609, guid: 97336952f28c48f44b9d85bc01bbece5, type: 3}
       propertyPath: miniMapController
       value: 
@@ -464,10 +468,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 168745770227960084, guid: 87fd5024b261ca64da7227756d8ac8e2, type: 3}
-      propertyPath: m_Name
-      value: Base_Weapon
-      objectReference: {fileID: 0}
     - target: {fileID: 2320583659515685767, guid: 87fd5024b261ca64da7227756d8ac8e2, type: 3}
       propertyPath: m_Name
       value: Player
@@ -532,6 +532,10 @@ PrefabInstance:
     - target: {fileID: 4200566880699675705, guid: 690ddb0b4551b6140bd09a5d84fbf731, type: 3}
       propertyPath: m_Name
       value: MiniMap Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 4200566880699675706, guid: 690ddb0b4551b6140bd09a5d84fbf731, type: 3}
+      propertyPath: orthographic size
+      value: -85
       objectReference: {fileID: 0}
     - target: {fileID: 4200566880699675707, guid: 690ddb0b4551b6140bd09a5d84fbf731, type: 3}
       propertyPath: m_RootOrder

@@ -26,17 +26,13 @@ public class Room : MonoBehaviour
     {
         this.currentDoorState = DOOR_STATE.OPEN;
         this.hasPlayerEntered = false;
-        
         this.corridorExistsDictionary = new Dictionary<Vector2Int, bool?>();
         this.corridorExistsDictionary.Add(Vector2Int.up, null);
         this.corridorExistsDictionary.Add(Vector2Int.down, null);
         this.corridorExistsDictionary.Add(Vector2Int.left, null);
         this.corridorExistsDictionary.Add(Vector2Int.right, null);
 
-        this.playerEnterTriggerDelegate.collideWithPlayer += (other) =>
-        {
-            onPlayerEnter(other);
-        };
+        this.playerEnterTriggerDelegate.collideWithPlayer += onPlayerEnter;
     }
 
     void Update()
@@ -45,22 +41,23 @@ public class Room : MonoBehaviour
         slideDoors();
     }
 
-    public void init(int initialDegreeOfChance, Vector2Int origin, Dictionary<Vector2Int, Room> dungeonMap,
-        RoomManager roomManager)
-    {
-        this.degreeOfChance = initialDegreeOfChance;
-        this.mapCoordinate = origin;
-        this.wallOffUnreachableNeighbors(dungeonMap);
-        this.generateRandomCorridors(dungeonMap);
-        this.roomManager = roomManager;
-    }
-
     public void generateRandomCorridors(Dictionary<Vector2Int, Room> currentMap)
     {
         foreach (Transform t in roomOptions.corridorOrigins.OrderBy(x => Utils.random.Next()))
         {
             generateCorridor(currentMap, new Vector2Int((int) t.up.x, (int) t.up.y));
         }
+    }
+
+    public void init(int initialDegreeOfChance, Vector2Int origin, Dictionary<Vector2Int, Room> dungeonMap,
+        RoomManager roomManager)
+    {
+        this.degreeOfChance = initialDegreeOfChance;
+        this.mapCoordinate = origin;
+        this.roomManager = roomManager;
+
+        this.wallOffUnreachableNeighbors(dungeonMap);
+        this.generateRandomCorridors(dungeonMap);
     }
 
     public void wallOffUnreachableNeighbors(Dictionary<Vector2Int, Room> currentMap)
@@ -131,8 +128,7 @@ public class Room : MonoBehaviour
         bool isWall = this.corridorExistsDictionary[corridorDirection].HasValue &&
                       !this.corridorExistsDictionary[corridorDirection].Value;
         Transform corridorOrigin =
-            roomOptions.corridorOrigins.First(
-                t => (new Vector2Int((int) t.up.x, (int) t.up.y)) == corridorDirection);
+            roomOptions.corridorOrigins.First(t => (new Vector2Int((int) t.up.x, (int) t.up.y)) == corridorDirection);
         // If we don't own a wall in that direction AND our neighbor doesn't have a corridor already connected to us:
         if (!isWall && (neighbor == null || !hasCorridor(neighbor, -corridorDirection)))
         {

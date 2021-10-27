@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public abstract class EntityController : MonoBehaviour
@@ -34,14 +35,28 @@ public abstract class EntityController : MonoBehaviour
 
     private void playTakeDamageParticleSystem(Vector2 projectileDirection)
     {
-        ParticleSystem takeDamageParticleSystem = this.particleSystems
-            .First(psp => psp.name.Equals("takeDamage", StringComparison.OrdinalIgnoreCase))
-            .particleSystem;
+        ParticleSystem takeDamageParticleSystem = getParticleSystem("takeDamage");
 
         if (takeDamageParticleSystem.isPlaying) return;
 
         takeDamageParticleSystem.transform.up = projectileDirection.normalized;
         takeDamageParticleSystem.Play();
+    }
+
+    private void OnDestroy()
+    {
+        ParticleSystem deathParticleSystem = getParticleSystem("onDeath");
+        GameObject clone = Instantiate(
+            deathParticleSystem,
+            transform.position,
+            transform.rotation
+        ).gameObject;
+        Destroy(clone, deathParticleSystem.main.duration);
+    }
+
+    protected ParticleSystem getParticleSystem(String name)
+    {
+        return this.particleSystems?.First(psp => psp.name.Equals(name, StringComparison.OrdinalIgnoreCase)).particleSystem;
     }
 
     protected void applyKnockback(Vector2 projectileDirection, float knockBack)
