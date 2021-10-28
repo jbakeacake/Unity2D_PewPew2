@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class TransformHelper
 {
-    public static void lookAtCursor(Transform origin, Camera playerCamera)
+    public static void lookAtCursor(Transform origin, Camera playerCamera, float speed = 8.0f)
     {
         Vector2 mouseScreenPosition = playerCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = (mouseScreenPosition - (Vector2) origin.position).normalized;
 
-        origin.up = Vector2.Lerp(origin.up, direction, 8.0f * Time.deltaTime);
+        origin.up = Vector2.Lerp(origin.up, direction, speed * Time.deltaTime);
     }
 
     public static void lookAtTarget(Transform origin, Transform target)

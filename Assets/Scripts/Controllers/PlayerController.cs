@@ -22,8 +22,8 @@ public class PlayerController : EntityController
 
     void FixedUpdate() {
         RbMovementHelper.applyMovement(rb, forward, movementOptions);
-        TransformHelper.lookAtCursor(transform, playerCamera);
-        TransformHelper.lookAtCursor(weaponOrigin, playerCamera);
+        TransformHelper.lookAtCursor(transform, playerCamera, lookToSpeed);
+        TransformHelper.lookAtCursor(weaponOrigin, playerCamera, lookToSpeed);
         TransformHelper.swapSides(weaponOrigin, transform, playerCamera.ScreenToWorldPoint(Input.mousePosition));
     }
 

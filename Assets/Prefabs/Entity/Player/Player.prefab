@@ -77,6 +77,7 @@ MonoBehaviour:
     counterMovementThreshold: 0.175
     counterMovementMagnitude: 0.15
   maxHealth: 100
+  lookToSpeed: 12
   playerCamera: {fileID: 0}
 --- !u!1 &2320583660267194236
 GameObject:

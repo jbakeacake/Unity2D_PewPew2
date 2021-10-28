@@ -10,6 +10,8 @@ public abstract class EntityController : MonoBehaviour
     public Transform weaponOrigin;
     public List<ParticleSystemPair> particleSystems;
     public MovementOptions movementOptions;
+    public float maxHealth;
+    public float lookToSpeed;
 
     protected Rigidbody2D rb;
     protected Vector2 forward, lookDirection, knockbackVelocity;
@@ -17,8 +19,9 @@ public abstract class EntityController : MonoBehaviour
     protected float nextFire;
     protected float health;
 
-    public float maxHealth;
 
+    private bool isQuitting = false;
+    
     public abstract void useWeapon();
     public abstract void setMovementDirection();
 
@@ -43,20 +46,37 @@ public abstract class EntityController : MonoBehaviour
         takeDamageParticleSystem.Play();
     }
 
-    private void OnDestroy()
+    private void OnApplicationQuit()
     {
-        ParticleSystem deathParticleSystem = getParticleSystem("onDeath");
-        GameObject clone = Instantiate(
-            deathParticleSystem,
-            transform.position,
-            transform.rotation
-        ).gameObject;
-        Destroy(clone, deathParticleSystem.main.duration);
+        isQuitting = true;
     }
 
-    protected ParticleSystem getParticleSystem(String name)
+    private void OnDestroy()
     {
-        return this.particleSystems?.First(psp => psp.name.Equals(name, StringComparison.OrdinalIgnoreCase)).particleSystem;
+        if (isQuitting) return;
+        instantiateParticleSystem("onDeath");
+    }
+
+    public ParticleSystem instantiateParticleSystem(String name)
+    {
+        ParticleSystem particleSystem = getParticleSystem(name);
+        if (particleSystem != null)
+        {
+            GameObject clone = Instantiate(
+                particleSystem,
+                transform.position,
+                transform.rotation
+            ).gameObject;
+            Destroy(clone, particleSystem.main.duration);
+        }
+        
+        return particleSystem;
+    }
+
+    public ParticleSystem getParticleSystem(String name)
+    {
+        return this.particleSystems?.FirstOrDefault(psp => name.Equals(psp.name, StringComparison.OrdinalIgnoreCase))
+            .particleSystem;
     }
 
     protected void applyKnockback(Vector2 projectileDirection, float knockBack)

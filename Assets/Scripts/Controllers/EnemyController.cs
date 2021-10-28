@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TreeEditor;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
@@ -13,6 +14,11 @@ public class EnemyController : EntityController
     private Transform player;
     private NavMeshAgent agent;
     private float originalStoppingDistance;
+    private bool isActive;
+    private void Awake()
+    {
+        StartCoroutine(performSpawnInAnimation());
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +36,7 @@ public class EnemyController : EntityController
 
     void Update()
     {
+        if (!isActive) return;
         TransformHelper.lookAtTarget(this.weaponOrigin.transform, player);
         TransformHelper.lookAtTarget(this.transform, player);
         TransformHelper.swapSides(weaponOrigin, transform, player.position);
@@ -39,6 +46,7 @@ public class EnemyController : EntityController
 
     void FixedUpdate()
     {
+        if (!isActive) return;
         RbMovementHelper.applyMovement(this.rb, this.forward, this.movementOptions);
     }
 
@@ -69,6 +77,23 @@ public class EnemyController : EntityController
         }
         
         this.forward = this.agent.desiredVelocity.normalized;
+    }
+
+    private IEnumerator performSpawnInAnimation()
+    {
+        List<SpriteRenderer> spriteRenderers = GetComponentsInChildren<SpriteRenderer>().ToList();
+        List<Collider2D> collider2Ds = GetComponentsInChildren<Collider2D>().ToList();
+        this.isActive = false;
+        spriteRenderers.ForEach(sr => sr.enabled = false);
+        collider2Ds.ForEach(col => col.enabled = false);
+        
+        ParticleSystem particleSystem = instantiateParticleSystem("onSpawn");
+        
+        yield return new WaitForSeconds(particleSystem?.main.duration ?? 0.0f);
+
+        this.isActive = true;
+        spriteRenderers.ForEach(sr => sr.enabled = true);
+        collider2Ds.ForEach(col => col.enabled = true);
     }
 
     private void chasePlayer()

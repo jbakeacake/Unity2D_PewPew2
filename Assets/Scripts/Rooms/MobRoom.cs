@@ -41,6 +41,10 @@ public class MobRoom : Room
         {
             for (int enemiesSpawnedIn = 0; enemiesSpawnedIn < allowedToSpawnAtOnce;)
             {
+                if (currentEnemies >= numberOfEnemies)
+                {
+                    break;
+                }
                 GameObject enemyClone = RandomSpawner.trySpawnObject(roomOptions, enemies);
                 enemyClone.transform.SetParent(navMesh.transform);
                 activeEnemies.Add(enemyClone.GetComponent<EnemyController>());

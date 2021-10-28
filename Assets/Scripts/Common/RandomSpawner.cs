@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.Object;
 
 public class RandomSpawner
 {
@@ -9,13 +9,13 @@ public class RandomSpawner
     {
         if (objectPrefabs == null || objectPrefabs.Length == 0)
         {
-            throw new System.Exception("Missing object prefab(s) to spawn...");
+            throw new Exception("Missing object prefab(s) to spawn...");
         }
 
         GameObject objectToSpawn = objectPrefabs.Skip(Utils.getRandomInteger(0, objectPrefabs.Length)).First();
         Vector3 spawnLocation = getRandomSpawnLocation(options.spawnCircleRadius, options.spawnCircleCenter, options.spawnLayers);
 
-        return MonoBehaviour.Instantiate(objectToSpawn,
+        return Instantiate(objectToSpawn,
             spawnLocation,
             Quaternion.identity);
     }

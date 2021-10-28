@@ -1046,9 +1046,10 @@ MonoBehaviour:
   doorways: []
   activeEnemies: []
   numberOfEnemies: 10
+  currentDoorState: 0
   navMesh: {fileID: 4731570588217346818}
-  allowedToSpawnAtOnce: 2
-  spawnRate: 5
+  allowedToSpawnAtOnce: 3
+  spawnRate: 3
   enemies:
   - {fileID: 535881019697478263, guid: 250a3aaaed7120847a51d3ea2e347d11, type: 3}
   destructibles: []

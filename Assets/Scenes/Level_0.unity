@@ -157,6 +157,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 503036158965035448, guid: eff35271a9b78ad40ac9812e0600b967, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 503036158965035448, guid: eff35271a9b78ad40ac9812e0600b967, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 503036158965035448, guid: eff35271a9b78ad40ac9812e0600b967, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -100
       objectReference: {fileID: 0}
@@ -256,6 +264,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 503036160119787327, guid: eff35271a9b78ad40ac9812e0600b967, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 145
+      objectReference: {fileID: 0}
+    - target: {fileID: 503036160119787327, guid: eff35271a9b78ad40ac9812e0600b967, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 145
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eff35271a9b78ad40ac9812e0600b967, type: 3}
 --- !u!114 &1284040908 stripped
@@ -354,6 +370,14 @@ PrefabInstance:
       propertyPath: miniMapController
       value: 
       objectReference: {fileID: 1284040908}
+    - target: {fileID: 72482004216691609, guid: 97336952f28c48f44b9d85bc01bbece5, type: 3}
+      propertyPath: roomVariance.Array.data[0].weight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 72482004216691609, guid: 97336952f28c48f44b9d85bc01bbece5, type: 3}
+      propertyPath: roomVariance.Array.data[1].weight
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 72482004216691610, guid: 97336952f28c48f44b9d85bc01bbece5, type: 3}
       propertyPath: m_RootOrder
       value: 1

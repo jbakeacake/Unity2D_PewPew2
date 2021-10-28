@@ -188,12 +188,15 @@ MonoBehaviour:
     particleSystem: {fileID: 8779666075223656027}
   - name: onDeath
     particleSystem: {fileID: 8233529066347094414, guid: 58f7f6f11296b2842aa20f134fbf092a, type: 3}
+  - name: onSpawn
+    particleSystem: {fileID: 4145630926748869825, guid: c14f3e3340dfb6d46b45d27588bee625, type: 3}
   movementOptions:
     speed: 10
     dashDistance: 5
     counterMovementThreshold: 0.175
     counterMovementMagnitude: 0.15
   maxHealth: 50
+  lookToSpeed: 0
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 1280

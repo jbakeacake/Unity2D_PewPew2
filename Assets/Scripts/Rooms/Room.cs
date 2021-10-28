@@ -89,7 +89,7 @@ public class Room : MonoBehaviour
     private void setCurrentDoorState()
     {
         int enemiesActive = activeEnemies.Count(enemy => enemy != null);
-        this.currentDoorState = !hasPlayerEntered || (enemiesActive <= 0 && activeEnemies.Count == numberOfEnemies)
+        this.currentDoorState = !hasPlayerEntered || (enemiesActive <= 0 && activeEnemies.Count >= numberOfEnemies)
             ? DOOR_STATE.OPEN
             : DOOR_STATE.CLOSED;
     }
