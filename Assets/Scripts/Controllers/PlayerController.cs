@@ -31,13 +31,15 @@ public class PlayerController : EntityController
     {
         forward = Vector2.zero;
 
-        xInput = Mathf.Round(Input.GetAxis("Horizontal"));
-        yInput = Mathf.Round(Input.GetAxis("Vertical"));
+        xInput = Input.GetAxis("Horizontal");
+        yInput = Input.GetAxis("Vertical");
 
         Vector2 forwardStepDirection = yInput * Vector2.up;
         Vector2 sideStepDirection = xInput * Vector2.right;
 
-        forward = (forwardStepDirection + sideStepDirection).normalized;
+        forward = (forwardStepDirection + sideStepDirection).magnitude > 1
+            ? (forwardStepDirection + sideStepDirection).normalized
+            : (forwardStepDirection + sideStepDirection);
     }
 
     public override void useWeapon()

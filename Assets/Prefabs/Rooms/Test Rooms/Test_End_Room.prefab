@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &470411784699514866
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4238942712570179453}
+  m_Layer: 0
+  m_Name: Exit Origin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4238942712570179453
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 470411784699514866}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1194097972704324851}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &958502941397224925
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,7 +178,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1194097972704324851}
-  - component: {fileID: 5306650967283206633}
+  - component: {fileID: 3999789502404526781}
   m_Layer: 0
   m_Name: Test_End_Room
   m_TagString: Untagged
@@ -172,10 +202,11 @@ Transform:
   - {fileID: 126507467584728211}
   - {fileID: 3979732224572601564}
   - {fileID: 6100003890072713828}
+  - {fileID: 4238942712570179453}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5306650967283206633
+--- !u!114 &3999789502404526781
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -184,7 +215,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1194097972704324850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c078623c0e5fda34d9a7663cedc47c48, type: 3}
+  m_Script: {fileID: 11500000, guid: a04dd7e14ef0e7844b76198457bd9980, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   roomManager: {fileID: 0}
@@ -208,6 +239,9 @@ MonoBehaviour:
   doorways: []
   activeEnemies: []
   numberOfEnemies: 0
+  currentDoorState: 0
+  exitOrigin: {fileID: 4238942712570179453}
+  portalPrefab: {fileID: 7718191315629354884, guid: 1f997d6d950d0d24aa075691582f9b1a, type: 3}
 --- !u!1 &1194097972954433976
 GameObject:
   m_ObjectHideFlags: 0

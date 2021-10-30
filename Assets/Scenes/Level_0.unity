@@ -367,6 +367,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 72482004216691609, guid: 97336952f28c48f44b9d85bc01bbece5, type: 3}
+      propertyPath: maxNumberOfRooms
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 72482004216691609, guid: 97336952f28c48f44b9d85bc01bbece5, type: 3}
       propertyPath: miniMapController
       value: 
       objectReference: {fileID: 1284040908}
